@@ -1,25 +1,26 @@
-const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const path = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
-  entry: './examples/entry.js',
+  entry: "./examples/entry.js",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: '[name].[hash:7].js',
-    chunkFilename: '[name].js'
+    filename: "[name].[hash:7].js",
+    chunkFilename: "[name].js"
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    modules: ['node_modules']
+    extensions: [".js", ".vue", ".json"],
+    modules: ["node_modules"]
   },
   devServer: {
-    host: '192.168.20.65',
+    host: "localhost",
     port: 8085,
-    publicPath: './',
+    publicPath: "./",
     hot: true,
     open: true
   },
@@ -27,7 +28,7 @@ const webpackConfig = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
           compilerOptions: {
             preserveWhitespace: false
@@ -36,19 +37,15 @@ const webpackConfig = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         // todo: 这种写法有待调整
         query: {
           limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
+          name: path.posix.join("static", "[name].[hash:7].[ext]")
         }
       }
     ]
@@ -56,16 +53,19 @@ const webpackConfig = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: '../index.html',
+      template: "./public/index.html",
+      filename: "../index.html"
     }),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash:7].css"
+    })
   ],
   optimization: {
     minimizer: []
   },
-  devtool: '#eval-source-map'
+  devtool: "#eval-source-map"
 };
 
 module.exports = webpackConfig;
