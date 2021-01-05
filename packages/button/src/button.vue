@@ -3,11 +3,13 @@
     class="fu-button"
     :class="[
       type ? 'fu-button--' + type : '',
+      size ? 'fu-button--' + size : '',
       {
         'is-plain': plain,
         'is-round': round,
-        'is-disabled': disabled
-      }
+        'is-disabled': disabled,
+        'is-circle': circle,
+      },
     ]"
   >
     <slot></slot>
@@ -16,26 +18,32 @@
 
 <script>
 export default {
-  name: "FuButton",
+  name: 'FuButton',
   props: {
     type: {
       type: String,
-      default: "default"
+      default: 'default',
     },
     plain: {
-      type: Boolean
+      type: Boolean,
     },
     round: {
-      type: Boolean
+      type: Boolean,
     },
     disabled: {
-      type: Boolean
+      type: Boolean,
+    },
+    circle: {
+      type: Boolean,
+    },
+    size: {
+      type: String
     }
   },
   data() {
-    return {};
-  }
-};
+    return {}
+  },
+}
 </script>
 
 <style lang="scss" scoped scoped>
@@ -91,5 +99,31 @@ export default {
 .fu-button.is-disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+.fu-button.is-circle {
+  border-radius: 50%;
+  padding: 12px;
+}
+.fu-button--text {
+  border-color: transparent;
+  color: #3071ea;
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+.fu-button--medium {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+.fu-button--small {
+    padding: 9px 15px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+.fu-button--mini {
+    padding: 7px 15px;
+    font-size: 12px;
+    border-radius: 3px;
 }
 </style>
