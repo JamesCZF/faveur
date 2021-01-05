@@ -20,7 +20,7 @@ const webpackConfig = {
   devServer: {
     host: "localhost",
     port: 8085,
-    publicPath: "./",
+    contentBase: "./dist",
     hot: true,
     open: true
   },
@@ -54,7 +54,7 @@ const webpackConfig = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: "../index.html"
+      filename: "./index.html"
     }),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),

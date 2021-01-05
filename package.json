@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=development webpack --config build/webpack.pro.js --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --watch"
+    "watch": "webpack --config build/webpack.pro.js --watch",
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.pro.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js"
   },
   "keywords": [],
   "author": "",
