@@ -1,16 +1,24 @@
 {
   "name": "faveur",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --config build/webpack.dev.js --watch",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.dev.js",
+    "build:lib": "cross-env NODE_ENV=production webpack --config build/webpack.lib.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesCZF/faveur.git"
+  },
+  "keywords": [
+    "vue",
+    "js"
+  ],
+  "author": "czf",
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
