@@ -1,5 +1,7 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
@@ -8,7 +10,7 @@ const webpackConfig = {
   entry: "./examples/entry.js",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "[name].[hash:7].js",
+    filename: "aseets/js/[name].[hash:7].js",
     chunkFilename: "[name].js"
   },
   resolve: {
@@ -35,7 +37,7 @@ const webpackConfig = {
       },
       {
         test: /\.(scss|css)$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
@@ -54,7 +56,11 @@ const webpackConfig = {
       template: "./public/index.html",
       filename: "./index.html"
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "aseets/css/[name].[contenthash:7].css"
+    })
   ],
   optimization: {
     minimizer: []
